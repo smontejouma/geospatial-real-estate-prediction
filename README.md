@@ -402,7 +402,6 @@ El repositorio incluye:
 - dataset final generado
 - notebooks de análisis y modelado
 - resultados del modelado
-- modelos entrenados de tamaño manejable
 
 Los archivos de entrada de gran tamaño no se incluyen en el repositorio, pero pueden descargarse desde sus fuentes oficiales siguiendo las instrucciones indicadas.
 
