@@ -1,0 +1,254 @@
+qgis:
+  prefix_path: "C:/Program Files/QGIS 3.42.3"
+
+crs:
+  epsg_default: 32630
+
+paths:
+  tif_path: "./dataset/geospatial/classification_30SUF.tif"
+  osm_folder: "./dataset/osmium"
+  output_base: "./dataset/geospatial"
+  dataset_dir: "./dataset/geospatial"
+  division_dir: "./dataset/district_level"
+
+run:
+  buffer_m: 200
+  years: [2015,2016,2017,2018,2019,2020,2021,2022,2023,2024]
+  quarters: ["Q1","Q2","Q3","Q4"]
+
+osm_layers:
+  points: "points"
+  lines: "lines"
+  multilinestrings: "multilinestrings"
+  multipolygons: "multipolygons"
+
+#preprocess_trimestral.py
+preprocess:
+  # --- Points ---
+  points_extract_keys:
+    - amenity
+    - highway
+    - shop
+    - tourism
+    - public_transport
+    - healthcare
+    - man_made
+    - place
+    - railway
+    - station
+    - subway
+    - traffic_calming
+    - traffic_sign
+    - traffic_island
+    - emergency
+    - power
+    - ford
+    - office
+    - government
+    - leisure
+    - playground
+    - sport
+    - natural
+    - historic
+
+  points_drop_always:
+    - is_in
+
+  # --- MultiLines ---
+  multilines_valid_routes:
+    - bus
+    - train
+    - railway
+    - light_rail
+    - tram
+    - subway
+    - ferry
+
+polygons:
+  bad_boundaries:
+    - administrative
+
+  needed_columns:
+    - boundary
+    - building
+    - landuse
+    - leisure
+    - natural
+    - water
+    - amenity
+    - shop
+    - tourism
+    - office
+    - craft
+    - man_made
+    - aeroway
+    - historic
+    - military
+    - barrier
+    - power
+
+#var_por_distrito.py
+
+districts:
+  id_col: "id_distrito"
+  name_col: "nombre_distrito"
+
+municipios:
+  - alhaurin_de_la_torre
+  - benahavis
+  - benalmadena
+  - estepona
+  - fuengirola
+  - marbella
+  - mijas
+  - rincon_de_la_victoria
+  - torremolinos
+  - malaga
+
+landuse_classes:
+  landuse_urban:
+    - residential
+    - commercial
+    - retail
+    - industrial
+    - construction
+    - garages
+
+  landuse_green:
+    - forest
+    - farmland
+    - meadow
+    - grass
+    - orchard
+    - vineyard
+    - plant_nursery
+
+  landuse_leisure:
+    - cemetery
+    - recreation_ground
+    - village_green
+
+  leisure_leisure:
+    - recreation_ground
+
+  landuse_water:
+    - reservoir
+    - basin
+    - pond
+
+  landuse_special:
+    - quarry
+    - brownfield
+    - landfill
+    - railway
+    - military
+
+  urban_landuse:
+    - residential
+    - commercial
+    - retail
+    - industrial
+    - mixed
+    - construction
+    - recreation_ground
+    - brownfield
+    - railway
+    - garages
+    - cemetery
+    - school
+    - university
+    - hospital
+
+features:
+  poi_groups:
+    - food_drink
+    - education
+    - health
+    - finance
+    - public_services
+    - culture_leisure
+    - parking_mobility
+    - utilities
+    - waste
+    - leisure_access
+    - leisure_sport
+    - traffic_control
+    - enforcement
+    - pt_stop
+    - pt_station
+    - pt_platform
+    - pt_entrance
+    - shop
+    - tourism
+    - office_services
+    - nature
+    - address_point
+
+  nearest_distances:
+    - where: "poi_group == 'pt_stop'"
+      out: "dist_pt_stop_m"
+    - where: "poi_group == 'pt_station'"
+      out: "dist_pt_station_m"
+    - where: "poi_group == 'health'"
+      out: "dist_health_m"
+    - where: "poi_group == 'education'"
+      out: "dist_education_m"
+    - where: "poi_group == 'food_drink'"
+      out: "dist_food_m"
+    - where: "poi_group == 'culture_leisure'"
+      out: "dist_culture_m"
+    - where: "poi_group == 'leisure_access'"
+      out: "dist_park_access_m"
+
+  line_groups:
+    - road_major
+    - road_secondary
+    - road_local
+    - road_service
+    - path_active
+    - rail
+    - water_linear
+    - barrier_line
+    - manmade_infra
+    - aerialway
+    - road_planned
+    - road_other
+
+# add_price.py
+
+prices:
+  # Excel que rellenas (ruta relativa a la raíz del proyecto)
+  xlsx_path: "./dataset/prices/prices_template_districts_filled.xlsx"
+  sheet_name: "LONG_INPUT"
+
+  # glob para encontrar CSVs (si lo dejas así, apunta a /division)
+  csv_glob: "./dataset/district_level/*/*/*_distritos_features_*.csv"
+
+  # cómo se construye el nombre de salida (replace simple)
+  out_replace_from: "_distritos_features_"
+  out_replace_to: "_distritos_features_with_price_"
+
+  # Si el Excel NO trae id_distrito: activar matching por nombre
+  enable_name_to_id_fallback: false
+  prices_district_name_col: "distrito"
+
+dataset_final:
+  out_dir: "./dataset_final"
+
+  # patrón de nombre esperado (regex)
+  filename_regex: "^(?P<mun>.+)_distritos_features_with_price_(?P<year>\\d{4})_(?P<q>Q[1-4])\\.csv$"
+
+  # claves únicas del dataset final
+  key_cols: ["municipio", "id_distrito", "year", "quarter"]
+
+  # columnas de texto que NO quieres intentar castear a numérico
+  exclude_text_cols: ["nombre_distrito", "distrito"]
+
+  # lecturas CSV robustas
+  encoding_primary: "utf-8"
+  encoding_fallback: "latin1"
+
+  # nombres de salida
+  out_csv: "dataset_distritos_long.csv"
+  out_parquet: "dataset_distritos_long.parquet"
+  out_report: "report_build_dataset.csv"

@@ -1,0 +1,25 @@
+model,pca_components,val_mae,val_r2,test_mae,test_r2,best_params
+lasso,,74.82028940060677,0.9841617244044145,78.20953455235207,0.9887368279052271,{'model__alpha': 1.0}
+elasticnet,,81.59256586088397,0.9827295300571989,81.37290556896068,0.987712922242963,"{'model__alpha': 0.1, 'model__l1_ratio': 0.9}"
+ridge,,84.15994799293172,0.9821466157518434,83.09122716976034,0.9873610967324093,{'model__alpha': 10.0}
+lasso,50.0,95.04176333994012,0.9746015333506957,98.22848737399377,0.9834544846846407,{'model__alpha': 0.001}
+ridge,50.0,95.04227496125445,0.974601253491375,98.22932878747311,0.9834543135639211,{'model__alpha': 0.1}
+elasticnet,50.0,95.04236195969216,0.9746013032109533,98.2284900081095,0.9834540584075736,"{'model__alpha': 0.001, 'model__l1_ratio': 0.9}"
+adaboost,,100.93551477136538,0.9661074612000515,122.28710304855898,0.9595100248354027,"{'model__estimator__max_depth': 4, 'model__learning_rate': 0.03, 'model__loss': 'linear', 'model__n_estimators': 400}"
+xgb,,103.09819459134617,0.9569162236811913,129.27444689589765,0.9365443096604976,"{'model__colsample_bytree': 1.0, 'model__learning_rate': 0.03, 'model__max_depth': 3, 'model__min_child_weight': 5, 'model__reg_lambda': 10.0, 'model__subsample': 1.0}"
+rf,,104.69630190997115,0.9428858886003478,135.84979588918526,0.924552416243642,"{'model__max_depth': 10, 'model__max_features': 1.0, 'model__min_samples_leaf': 5, 'model__min_samples_split': 2, 'model__n_estimators': 300}"
+lasso,38.0,134.20495437153633,0.9625024910346536,156.42840931253826,0.962825963096096,{'model__alpha': 1.0}
+ridge,38.0,135.60195700723486,0.9617669721202565,160.42213273315312,0.9611859392325437,{'model__alpha': 100.0}
+elasticnet,38.0,136.51646240161543,0.9612975451973891,161.952757558247,0.9604323872497376,"{'model__alpha': 0.1, 'model__l1_ratio': 0.5}"
+ridge,25.0,187.4929923019658,0.9226586954948883,190.92634025963994,0.9421141193877652,{'model__alpha': 100.0}
+lasso,25.0,188.75270165575344,0.9209496804013257,190.7366642842846,0.9415718618291675,{'model__alpha': 1.0}
+xgb,25.0,200.81660189302883,0.9015769296985734,353.4090769474987,0.7954990266232813,"{'model__colsample_bytree': 0.8, 'model__learning_rate': 0.1, 'model__max_depth': 5, 'model__min_child_weight': 1, 'model__reg_lambda': 10.0, 'model__subsample': 0.8}"
+xgb,50.0,207.21121799879805,0.890360237325843,335.61204881204986,0.8012539639837959,"{'model__colsample_bytree': 0.8, 'model__learning_rate': 0.03, 'model__max_depth': 5, 'model__min_child_weight': 1, 'model__reg_lambda': 10.0, 'model__subsample': 0.8}"
+xgb,38.0,219.04776421274042,0.8838548036704915,379.6892848789544,0.7745299092688273,"{'model__colsample_bytree': 0.8, 'model__learning_rate': 0.1, 'model__max_depth': 5, 'model__min_child_weight': 1, 'model__reg_lambda': 10.0, 'model__subsample': 1.0}"
+elasticnet,25.0,220.94319509010015,0.8967891642849669,297.2514034602876,0.870999705410838,"{'model__alpha': 1.0, 'model__l1_ratio': 0.1}"
+rf,50.0,254.31995571986602,0.855985643907847,410.92300134842617,0.7342544051782611,"{'model__max_depth': None, 'model__max_features': 0.5, 'model__min_samples_leaf': 3, 'model__min_samples_split': 2, 'model__n_estimators': 600}"
+rf,38.0,263.63428273532696,0.8508402865002375,426.538674143855,0.7222133433103884,"{'model__max_depth': 20, 'model__max_features': 0.5, 'model__min_samples_leaf': 3, 'model__min_samples_split': 2, 'model__n_estimators': 300}"
+rf,25.0,265.1939121549862,0.8420777710281322,417.6468407651967,0.7182314489998646,"{'model__max_depth': None, 'model__max_features': 0.5, 'model__min_samples_leaf': 5, 'model__min_samples_split': 2, 'model__n_estimators': 600}"
+adaboost,38.0,280.3215013944722,0.8479816258940833,427.66293935446475,0.7285739113560978,"{'model__estimator__max_depth': 4, 'model__learning_rate': 0.3, 'model__loss': 'square', 'model__n_estimators': 400}"
+adaboost,50.0,280.8373593181407,0.8420252011107835,419.9210840715446,0.7329538659708658,"{'model__estimator__max_depth': 4, 'model__learning_rate': 0.3, 'model__loss': 'linear', 'model__n_estimators': 400}"
+adaboost,25.0,304.0763718067072,0.8230569865277325,438.18915438554336,0.7118625965867122,"{'model__estimator__max_depth': 4, 'model__learning_rate': 0.1, 'model__loss': 'linear', 'model__n_estimators': 200}"
